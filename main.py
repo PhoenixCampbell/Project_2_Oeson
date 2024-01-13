@@ -50,3 +50,29 @@ data = pd.read_csv(file_path)
 # plt.ylabel("Job Title")
 # plt.subplots_adjust(left=0.202)
 # plt.show()
+
+data["salary"] = pd.to_numeric(data["salary"], errors="coerce")
+average_salary_by_title = data.groupby("job_title")["salary"].mean().reset_index()
+
+plt.figure(figsize=(16, 8))
+sns.barplot(
+    x="salary",
+    y="job_title",
+    data=average_salary_by_title.sort_values(by="salary", ascending=False),
+    hue="job_title",
+    legend=False,
+)
+plt.title("Average Salaries by Job Titles")
+plt.subplots_adjust(bottom=0.040, top=0.95)
+plt.xlabel("Average Salary")
+plt.ylabel("Job Title")
+plt.show()
+# *General average salaries
+
+top_highest = average_salary_by_title.nlargest(5, "salary")
+print("\nTop Job Titles w/ Highest Average Salaries: ")
+print(top_highest)
+top_lowest = average_salary_by_title.nsmallest(5, "salary")
+print("\nTop Job Titles w/ Least Average Salaries: ")
+print(top_lowest)
+# *Printing out top and lower ends of the spectrum
