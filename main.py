@@ -207,7 +207,7 @@ sns.barplot(
     hue="work_setting",
     data=average_by_category.sort_values(by="salary", ascending=False),
     palette="viridis",  #!using palette as hue is being used previously
-    ci=None,
+    errorbar=None,
 )
 plt.title("Average Salary by Employment Type, Work Setting, and Company Size")
 plt.subplots_adjust(right=0.86)
@@ -216,3 +216,6 @@ plt.ylabel("Employment Type")
 plt.legend(title="Work Setting", bbox_to_anchor=(1.05, 1), loc="upper left")
 plt.show()
 # *average salary based on employment type, work setting, and "company_size"
+
+print(data.describe())
+# *descriptive Stats on relevant terms
